@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GrönaKorset</title>
+	<style type="text/css">
+		input {
+			display: block;
+			font-size: large;
+			width: 100%;
+			margin: 5px;
+			box-sizing : border-box;
+		}
+	</style>
+</head>
+<body>
+	<h1>Välkommen till Gröna korset!</h1>
+	<table>
+		<tr>
+			<td>
+				<input type="text" id="avdid">
+			</td>
+			<td>
+				<input type="button" value="Logga in Översikt" onclick="loggaIn();">
+				<input type="button" value="Logga in Registrering" onclick="registrering();">
+			</td>
+			<td>
+				<input type="button" value="Lägg till ny avdelning" onclick="nyID();">
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		function loggaIn(){
+			var id = document.getElementById('avdid').value;
+			window.open(encodeURI('/index.html?id=' + id),'_self')
+		};
+		function registrering(){
+			var id = document.getElementById('avdid').value;
+			window.open(encodeURI('/reg.html?id=' + id),'_self')
+		};
+		function nyID(){
+			window.open(encodeURI('/nyid.html?id=#ny'),'_self')
+		};
+	</script>
+</body>
+</html>

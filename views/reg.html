@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GrönaKorset Registrering</title>
+	<style type="text/css">
+		.amne {
+			text-align: center;
+		}
+		.table {
+			display: table;
+			width: 100%;
+		}
+		.table div {
+			display: table-row;
+		}
+		.table div div {
+			display: table-cell;
+			padding: 30px;
+			border: solid 2px #000;
+			color: white;
+			width: 20%;
+			text-align: center;
+			-webkit-user-select: none; /* Safari */        
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* IE10+/Edge */
+			user-select: none; /* Standard */
+			webkit-transition: all 150ms linear;
+		    -moz-transition: all 150ms linear;
+		    -o-transition: all 150ms linear;
+		    -ms-transition: all 150ms linear;
+		    transition: all 150ms linear;
+		}
+		.table div div:hover{
+			opacity: .8;
+		}
+		.table div div:active{
+			opacity: .3;
+		}
+		.table div div:nth-child(1){
+			background-color: green;
+		}
+		.table div div:nth-child(2){
+			background-color: lightgreen;
+		}
+		.table div div:nth-child(3){
+			background-color: yellow;
+		}
+		.table div div:nth-child(4){
+			background-color: orange;
+		}
+		.table div div:nth-child(5){
+			background-color: red;
+		}
+		@keyframes blink{
+			0%{opacity: 0;}
+			25%{opacity: .5;}
+			50%{opacity: 1;}
+			75%{opacity: .5;}
+			100%{opacity: 0;}
+		}
+		#offline {
+			position: fixed;
+			top: 0px;
+			right: 0px;
+			width: 100%;
+			background-color: red;
+			color: white;
+			text-align: center;
+			font-weight: bold;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="offline">Offline!</div>
+	<h1 class="amne">#amne#</h1>
+	<div class="table">
+		<div>
+			<div onclick="reg('0')">Bra</div>
+			<div onclick="reg('1')"></div>
+			<div onclick="reg('2')"></div>
+			<div onclick="reg('3')"></div>
+			<div onclick="reg('4')">Dåligt</div>
+		</div>
+	</div>
+	<script src="socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		function getUrlParameter(name) {
+			name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+			var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+			var results = regex.exec(location.search);
+			return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+		};
+		var geturl = window.location.href.replace('http://', '').replace('https://', '').split('/')[0];
+		//Lyssnar om server säger något
+		var socket = io.connect(geturl);
+		// Berättar för användare ifall koppling till server försvinner
+		socket.on('online', function () {
+			document.getElementById('offline').removeAttribute('style');
+		});
+		socket.on('disconnect', function () {
+			document.getElementById('offline').setAttribute('style', 'display: block;');
+		});
+		socket.on('err', function(data) {console.log('Error!')});
+		socket.on('message', function (data) {console.log(data);});
+		function reg(num){
+			var tosend = {'num': num, 'id': getUrlParameter('id')};
+			socket.emit('sendreg', tosend);
+		};
+		socket.on('uppdatera', function (id) {
+			if(getUrlParameter('id') == id){
+				location.reload();
+			};
+		});
+	</script>
+</body>
+</html>
