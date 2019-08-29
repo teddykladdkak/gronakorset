@@ -6,7 +6,7 @@ var mkdirp = require('mkdirp');
 
 var config = {
 	"public": __dirname + '/public',
-	"port": 9999,
+	"port": 3355,
 };
 
 //Kollar IP adress för server.
