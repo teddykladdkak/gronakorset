@@ -25,3 +25,4 @@ För installation av extern server, får ni hitta guider på annan plats.
 4. Tydligare och mer designad startsida.
 5. Stresstesta.
 6. Publicera på demo server.
+7. ID sparas lokalt på datorn, att man aktivt måste logga ut för att bli av med koden och för att man ska slippa logga in helatiden.
