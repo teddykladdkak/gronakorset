@@ -32,4 +32,3 @@ För installation av extern server, får ni hitta guider på annan plats.
 3. Fixa bra och tydlig ikon.
 4. Tydligare och mer designad startsida.
 5. Stresstesta.
-6. Publicera på demo server.
