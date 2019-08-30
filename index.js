@@ -56,7 +56,6 @@ if(!exists('config.json', '/')){
 				console.log('Kunde inte skapa "./config.json", du behöver skapa denna fil själv för att servern ska fungera.');
 			}else{
 				console.log('Filen "./config.json" är nu skapad');
-				console.log(confToSave)
 				config = confToSave;
 				startServer();
 			};
@@ -67,7 +66,6 @@ if(!exists('config.json', '/')){
 	if(!config || config == ''){
 		console.log('Filen "./config.json" kunde inte laddas');
 	}else{
-		console.log('Filen "./config.json" laddades');
 		startServer()
 	};
 };
@@ -125,7 +123,6 @@ function startServer(){
 		if (!fs.existsSync(wardsPath)) {
 			mkdirp(wardsPath, function (err) {
 			    if (err) console.error(err)
-			    else console.log("Skapade: " + wardsPath)
 			});
 		};
 	};
@@ -235,9 +232,6 @@ function startServer(){
 	};
 	if(!exists('mailKonto.json', '/')){
 		prompt.get(schema, function (err, result) {
-			console.log('Command-line input received:');
-			console.log('  username: ' + result.email);
-			console.log('  email: ' + result.losen);
 			var tosave = {
 				service: 'gmail',
 				auth: {
@@ -254,19 +248,15 @@ function startServer(){
 					if(!mailKonto || mailKonto == ''){}else{
 						config.mainmail = result.email;
 						var transporter = nodemailer.createTransport(mailKonto);
-						console.log('Mail kan nu skickas')
 					};
 				};
 			});
 		});
 	}else{
 		var mailKonto = JSON.parse(fs.readFileSync('mailKonto.json', 'utf8'));
-		console.log('Filen "./mailKonto.json" laddades');
 		if(!mailKonto || mailKonto == ''){}else{
 			var transporter = nodemailer.createTransport(mailKonto);
-			console.log(mailKonto)
 			config.mainmail = mailKonto.auth.user;
-			console.log('Mail kan nu skickas')
 		};
 	};
 
@@ -352,13 +342,10 @@ function startServer(){
 			var recID =  req.query.mail;
 			var id = makeNewId();
 			var path = getPath('wards', id);
-			console.log(recID)
 			if(!recID || recID == '' || recID == undefined){
 				console.log('Av någon anledning skickade inte användare med sin mail.')
 			}else{
-				if(!transporter || transporter == ''){
-					console.log('Mail är inte inställd, alltså kan inte ID skickas.')
-				}else{
+				if(!transporter || transporter == ''){}else{
 					var mailOptions = {
 						from: config.mainmail,
 						to: decodeURI(recID),
@@ -382,7 +369,6 @@ function startServer(){
 			mkdirp(path, function (err) {
 			    if (err){ console.error(err) }
 			    else {
-			    	console.log("Skapade: " + path)
 			    	res.redirect('index.html?id=' + id + '#ny');
 			    }
 			});
