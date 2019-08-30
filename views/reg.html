@@ -38,7 +38,9 @@
 			socket.emit('sendreg', tosend);
 		};
 		socket.on('uppdatera', function (id) {
-			if(getUrlParameter('id') == id){
+			if(id == 'all'){
+				location.reload();
+			}else if(getUrlParameter('id') == id){
 				location.reload();
 			};
 		});

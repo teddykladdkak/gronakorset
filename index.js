@@ -7,6 +7,7 @@ var nodemailer = require('nodemailer');
 var prompt = require('prompt');
 prompt.start();
 
+var time;
 //Kontrollerar ifall fil existerar
 function exists(path, dir){
 	var wholepath = __dirname + dir + path;
@@ -116,7 +117,21 @@ function startServer(){
 		};
 		return {'prev': pY + '-' + pM, 'next': nY + '-' + nM}
 	};
-
+	function getSetTime(){
+		if(!time || time == ''){
+			//time = getDatum().manad;
+			time = '2019-07';
+			return true;
+		}else{
+			if(time == getDatum().manad){
+				return false;
+			}else{
+				time = getDatum().manad;
+				return true;
+			}
+		};
+	};
+	getSetTime();
 
 	function checkWards(){
 		var wardsPath = getPath('wards', '');
@@ -212,7 +227,6 @@ function startServer(){
 		};
 		return color;
 	};
-
 
 	//Mail
 	//Skapar basfiler som bör ändras innan start!
@@ -458,6 +472,11 @@ function startServer(){
 				socket.broadcast.emit('uppdatera', data.id);
 			};
 		});
+		setInterval(function(){
+			if(getSetTime()){
+				socket.broadcast.emit('uppdatera', 'all');
+			};
+		}, 3600000);
 	});
 	server.listen(config.port);
 };
