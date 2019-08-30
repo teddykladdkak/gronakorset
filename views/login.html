@@ -38,6 +38,13 @@
 		function updateAmne(datum, elem){
 			socket.emit('nyttamne', {'amne': elem.value, 'datum': datum, 'id': getUrlParameter('id')});
 		};
+socket.on('uppdatera', function (id) {
+			if(id == 'all'){
+				location.reload();
+			}else if(getUrlParameter('id') == id){
+				location.reload();
+			};
+		});
 	</script>
 </body>
 </html>
