@@ -119,8 +119,7 @@ function startServer(){
 	};
 	function getSetTime(){
 		if(!time || time == ''){
-			//time = getDatum().manad;
-			time = '2019-07';
+			time = getDatum().manad;
 			return true;
 		}else{
 			if(time == getDatum().manad){
