@@ -14,7 +14,13 @@ Börja med att installera NodeJS och Npm.
 2. Installera moduler via terminalen (npm i)
 3. Vid behov ändra i "index.js" till önskad port.
 4. Starta servern i terminalen (node .)
-5. Local adress presenteras.
+5. Du kommer nu tillfrågas efter följande första gången servern startas:
+	1. Port servern ska lyssna på.
+	2. Domännamn som kommer användas.
+	3. Övrig info till mailet som skickas ut till användare när de skapar nytt ID.
+	4. Gmail konto, som kommer användas för att skicka ut ID via mail.
+	5. Lösenord till gmail-kontot ovan.
+6. Lokal adress presenteras.
 
 För installation av extern server, får ni hitta guider på annan plats.
 
@@ -25,4 +31,3 @@ För installation av extern server, får ni hitta guider på annan plats.
 4. Tydligare och mer designad startsida.
 5. Stresstesta.
 6. Publicera på demo server.
-7. ID sparas lokalt på datorn, att man aktivt måste logga ut för att bli av med koden och för att man ska slippa logga in helatiden.
