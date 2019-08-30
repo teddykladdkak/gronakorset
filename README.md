@@ -8,7 +8,7 @@ Vidare läsning om konceptet kan göras på: https://sas.vgregion.se/om-sodra-al
 Korset är uppdelad i flera rutor, som alla representerar en dag. Korset har även ett tema, vilken man dagligen graderar med färger hur bra eller dåligt det varit. Detta projektet ger möjlighet för all vårdpersonal att själva påverka vilken färg som slutligen kommer vara för dagen. Genom att räkna ut medianen från dagen och översätta till en färg.
 
 ## Installation
-Snart kommer kod drivas via webbserver, vilket ger möjlighet att använda detta projektet utan egen server. Men ifall man trotts allt vill köra detta själv behöver följande steg genomföras.
+Denna kod drivs för tillfället via en webbserver (http://www.gronakorset.tk/), vilket ger möjlighet att använda detta projektet utan egen server. Men ifall man trotts allt vill köra detta själv behöver följande steg genomföras.
 
 Börja med att installera NodeJS och Npm.
 
