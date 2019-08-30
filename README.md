@@ -1,7 +1,9 @@
 # Gröna korset
 Projekt som ämnar digitalisera och tillgängliggöra Gröna korset konceptet, för att mäta olika fokus ämnen på vårdavdelning.
 
-Vidare läsning kan göras på: https://sas.vgregion.se/om-sodra-alvsborgs-sjukhus/utvecklingsarbete/grona-korset/
+Projektet kan användas på: http://www.gronakorset.tk/
+
+Vidare läsning om konceptet kan göras på: https://sas.vgregion.se/om-sodra-alvsborgs-sjukhus/utvecklingsarbete/grona-korset/
 
 Korset är uppdelad i flera rutor, som alla representerar en dag. Korset har även ett tema, vilken man dagligen graderar med färger hur bra eller dåligt det varit. Detta projektet ger möjlighet för all vårdpersonal att själva påverka vilken färg som slutligen kommer vara för dagen. Genom att räkna ut medianen från dagen och översätta till en färg.
 
