@@ -374,23 +374,27 @@ function startServer(){
 			});
 		});
 		app.get('/reg.html', function(req, res) {
-			var path = getPath('wards', req.query.id);
-			if (fs.existsSync(path)) {
-				var options = {};
-				var filePath = path + getDatum().manad + '.json';
-				if (fs.existsSync(filePath)) {
-					var readData = fs.readFileSync(filePath, 'utf8');
-				}else{
-					var readData = makeDefFile(path);
-				};
-				options.data = JSON.parse(readData);
-				if(!req.query.dat || req.query.dat == ''){}else{
-					options.datum = req.query.dat;
-				};
-				options.id = req.query.id;
-				res.render('reg', options);
+			if(!req.query.id || req.query.id == ''){
+				res.redirect('index.html');
 			}else{
-
+				var path = getPath('wards', req.query.id);
+				if (fs.existsSync(path)) {
+					var options = {};
+					var filePath = path + getDatum().manad + '.json';
+					if (fs.existsSync(filePath)) {
+						var readData = fs.readFileSync(filePath, 'utf8');
+					}else{
+						var readData = makeDefFile(path);
+					};
+					options.data = JSON.parse(readData);
+					if(!req.query.dat || req.query.dat == ''){}else{
+						options.datum = req.query.dat;
+					};
+					options.id = req.query.id;
+					res.render('reg', options);
+				}else{
+					res.redirect('index.html');
+				};
 			};
 		});
 		app.get(['/', '/index.html'], function(req, res) {
