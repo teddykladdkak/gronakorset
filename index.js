@@ -8,6 +8,7 @@ var prompt = require('prompt');
 prompt.start();
 
 var time;
+var amneToSync = [];
 //Kontrollerar ifall fil existerar
 function exists(path, dir){
 	var wholepath = __dirname + dir + path;
@@ -461,24 +462,29 @@ function startServer(){
 				socket.broadcast.emit('registrerat', {'varde': data.num, 'datum': datum, 'color': color, 'id': data.id});
 			};
 		});
+		
 		socket.on('nyttamne', function (data) {
 			var path = getPath('wards', data.id);
 			var filePath = path + data.datum + '.json';
 			if (fs.existsSync(filePath)) {
 				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-				readData.amne = data.amne
+				readData.amne = data.amne;
 				fs.writeFileSync(path + data.datum + '.json', JSON.stringify(readData, null, ' '));
-				socket.broadcast.emit('uppdatera', data);
+				amneToSync.push(data.id);
+				socket.broadcast.emit('uppdatera', amneToSync.length);
 			};
 		});
-		socket.on('uppdatAmne', function (data) {
-			console.log(data);
-			var path = getPath('wards', data.id);
-			var filePath = path + data.datum + '.json';
-			if (fs.existsSync(filePath)) {
-				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-				data.amne = readData.amne
-				socket.emit('uppdatAmne', data);
+		socket.on('uppdatAmne', function (info) {
+			if(info.id == amneToSync[info.num - 1]){
+				var data = {'id': info.id};
+				var path = getPath('wards', data.id);
+				data.datum = getDatum().manad;
+				var filePath = path + data.datum + '.json';
+				if (fs.existsSync(filePath)) {
+					var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+					data.amne = readData.amne
+					socket.emit('uppdatAmne', data);
+				};
 			};
 		});
 		setInterval(function(){

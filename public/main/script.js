@@ -68,6 +68,12 @@
 	};
 
 //Grundfunktioner
+	//Datum funktion.
+	function addzero(number){if(number <= 9){return "0" + number;}else{return number;};};
+	function getDatum(dateannan, timeannan, milisecsave){
+		if(!dateannan && !timeannan && !milisecsave){var date = new Date();}else if(!milisecsave){var annatdatum = dateannan.split('-');var annattid = timeannan.split(':');var date = new Date(annatdatum[0], annatdatum[1] - 1, annatdatum[2], annattid[0], annattid[1]);}else{var date = new Date(parseInt(milisecsave));};
+		return {"datum": date.getFullYear() + '-' + addzero(date.getMonth() + 1) + '-' + addzero(date.getDate()), "tid": addzero(date.getHours()) + ':' + addzero(date.getMinutes()), "milisec": date.getTime(), "manad": date.getFullYear() + '-' + addzero(date.getMonth() + 1)};
+	};
 	//Funktion som tar ut querys ifrån menyn.
 	function getUrlParameter(name) {
 		name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');

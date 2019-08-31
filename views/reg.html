@@ -37,20 +37,16 @@
 			var tosend = {'num': num, 'id': getUrlParameter('id')};
 			socket.emit('sendreg', tosend);
 		};
-		socket.on('uppdatera', function (data) {
-			console.log(data.id)
-			if(data.id == 'all'){
-				socket.emit('uppdatAmne', data);
-			}else if(getUrlParameter('id') == data.id){
-				socket.emit('uppdatAmne', data);
-			};
+		socket.on('uppdatera', function (num) {
+				socket.emit('uppdatAmne', {'id': getUrlParameter('id'), 'num': num});
 		});
 		socket.on('uppdatAmne', function (data) {
-			console.log(data)
-			var wrapper = document.getElementsByClassName('amne')[0];
-			removechilds(wrapper);
-				var text = document.createTextNode(data.amne);
-				wrapper.appendChild(text);
+			if(data.datum == getDatum().manad){
+				var wrapper = document.getElementsByClassName('amne')[0];
+				removechilds(wrapper);
+					var text = document.createTextNode(data.amne);
+					wrapper.appendChild(text);
+				};
 		});
 	</script>
 </body>
