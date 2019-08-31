@@ -30,6 +30,7 @@
 		});
 		socket.on('disconnect', function () {
 			document.getElementById('offline').setAttribute('style', 'display: block;');
+			location.reload();
 		});
 		socket.on('err', function(data) {console.log('Error!')});
 		socket.on('message', function (data) {console.log(data);});
@@ -38,7 +39,7 @@
 			socket.emit('sendreg', tosend);
 		};
 		socket.on('uppdatera', function (num) {
-				socket.emit('uppdatAmne', {'id': getUrlParameter('id'), 'num': num});
+			socket.emit('uppdatAmne', {'id': getUrlParameter('id'), 'num': num});
 		});
 		socket.on('uppdatAmne', function (data) {
 			if(data.datum == getDatum().manad){
@@ -47,6 +48,9 @@
 					var text = document.createTextNode(data.amne);
 					wrapper.appendChild(text);
 				};
+		});
+		socket.on('reloadAll', function (data) {
+			location.reload();
 		});
 	</script>
 </body>

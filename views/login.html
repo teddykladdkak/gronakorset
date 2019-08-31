@@ -26,24 +26,32 @@
 		});
 		socket.on('disconnect', function () {
 			document.getElementById('offline').setAttribute('style', 'display: block;');
+			location.reload();
 		});
 		socket.on('err', function(data) {console.log('Error!')});
 		socket.on('message', function (data) {console.log(data);});
 		socket.on('registrerat', function (data) {
 			if(getUrlParameter('id') == data.id){
 				var datid = numToText(data.datum);
-				document.getElementsByClassName(datid)[0].setAttribute('style', 'background-color: ' + data.color);
+				var datIDElem = document.getElementsByClassName(datid)[0];
+					datIDElem.setAttribute('class', datIDElem.getAttribute('class').split(' ')[0] + ' ' + data.color);
 			};
 		});
 		function updateAmne(datum, elem){
 			socket.emit('nyttamne', {'amne': elem.value, 'datum': datum, 'id': getUrlParameter('id')});
 		};
-		socket.on('uppdatera', function (id) {
-			if(id == 'all'){
-				location.reload();
-			}else if(getUrlParameter('id') == id){
-				location.reload();
+		socket.on('uppdatera', function (num) {
+			socket.emit('uppdatAmne', {'id': getUrlParameter('id'), 'num': num});
+		});
+		socket.on('uppdatAmne', function (data) {
+			var amneinput = document.getElementById('headinput').getElementsByTagName('input')[0];
+			var datum = amneinput.getAttribute('data-date');
+			if(data.datum == datum){
+				amneinput.value = data.amne;
 			};
+		});
+		socket.on('reloadAll', function (data) {
+			location.reload();
 		});
 	</script>
 </body>

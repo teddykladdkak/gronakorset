@@ -83,20 +83,29 @@ input {
 .table div div:active{
 	opacity: .3;
 }
-.table div div:nth-child(1){
+.white {
+	background-color: white;
+	color: black;
+}
+.table div div:nth-child(1), .green {
 	background-color: green;
+	color: white;
 }
-.table div div:nth-child(2){
+.table div div:nth-child(2), .lightgreen {
 	background-color: lightgreen;
+	color: black;
 }
-.table div div:nth-child(3){
+.table div div:nth-child(3), .yellow {
 	background-color: yellow;
+	color: black;
 }
-.table div div:nth-child(4){
+.table div div:nth-child(4), .orange {
 	background-color: orange;
+	color: white;
 }
-.table div div:nth-child(5){
+.table div div:nth-child(5), .red{
 	background-color: red;
+	color: white;
 }
 .table div div, #korsWrapper td {
 	webkit-transition: all 150ms linear;

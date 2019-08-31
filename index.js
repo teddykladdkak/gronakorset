@@ -298,13 +298,13 @@ function startServer(){
 				innerHMTL.push('<td></td>');
 			}else{
 				var color = countColor(data[i + 1]);
-				innerHMTL.push('<td style="background-color: ' + color + '" class="' + numToText(datumSplit[0] + '-' + datumSplit[1] + '-' + addzero(i + 1)) + '">' + (i + 1) + '</td>')
+				innerHMTL.push('<td class="' + numToText(datumSplit[0] + '-' + datumSplit[1] + '-' + addzero(i + 1)) + ' ' + color + '">' + (i + 1) + '</td>')
 			};
 		};
 		if(datumSplit[1] >= 13){}else{
 			var prevNext = nextAndPrevMonth(datumSplit[0], datumSplit[1]);
 		};
-		innerHMTL[0] = '<table><tbody><tr><td colspan="7" id="headinput"><input type="text" value="' + data.amne + '" onchange="updateAmne(\'' + datumSplit[0] + '-' + datumSplit[1] + '\', this)"/></td></tr><tr><td onclick="next(\'' + prevNext.prev + '\')"><-</td><td colspan="5">' + datumSplit[0] + '-' + datumSplit[1] + '</td><td onclick="next(\'' + prevNext.next + '\')">-></td></tr><tr><td colspan="2" rowspan="2"></td>' + innerHMTL[0];
+		innerHMTL[0] = '<table><tbody><tr><td colspan="7" id="headinput"><input type="text" data-date="' + datumSplit[0] + '-' + datumSplit[1] + '" value="' + data.amne + '" onchange="updateAmne(\'' + datumSplit[0] + '-' + datumSplit[1] + '\', this)"/></td></tr><tr><td onclick="next(\'' + prevNext.prev + '\')"><-</td><td colspan="5">' + datumSplit[0] + '-' + datumSplit[1] + '</td><td onclick="next(\'' + prevNext.next + '\')">-></td></tr><tr><td colspan="2" rowspan="2"></td>' + innerHMTL[0];
 		innerHMTL[3] = '<td colspan="2" rowspan="2"></td></tr><tr>' + innerHMTL[3];
 		innerHMTL[6] = '</tr><tr>' + innerHMTL[6];
 		innerHMTL[13] = '</tr><tr>' + innerHMTL[13];
@@ -470,15 +470,15 @@ function startServer(){
 				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 				readData.amne = data.amne;
 				fs.writeFileSync(path + data.datum + '.json', JSON.stringify(readData, null, ' '));
-				amneToSync.push(data.id);
+				amneToSync.push({"id": data.id, "datum": data.datum});
 				socket.broadcast.emit('uppdatera', amneToSync.length);
 			};
 		});
 		socket.on('uppdatAmne', function (info) {
-			if(info.id == amneToSync[info.num - 1]){
+			if(info.id == amneToSync[info.num - 1].id){
 				var data = {'id': info.id};
 				var path = getPath('wards', data.id);
-				data.datum = getDatum().manad;
+				data.datum = amneToSync[info.num - 1].datum;
 				var filePath = path + data.datum + '.json';
 				if (fs.existsSync(filePath)) {
 					var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -489,7 +489,7 @@ function startServer(){
 		});
 		setInterval(function(){
 			if(getSetTime()){
-				socket.broadcast.emit('uppdatera', 'all');
+				socket.broadcast.emit('reloadAll', 'all');
 			};
 		}, 3600000);
 	});
