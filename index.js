@@ -468,7 +468,17 @@ function startServer(){
 				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 				readData.amne = data.amne
 				fs.writeFileSync(path + data.datum + '.json', JSON.stringify(readData, null, ' '));
-				socket.broadcast.emit('uppdatera', data.id);
+				socket.broadcast.emit('uppdatera', data);
+			};
+		});
+		socket.on('uppdatAmne', function (data) {
+			console.log(data);
+			var path = getPath('wards', data.id);
+			var filePath = path + data.datum + '.json';
+			if (fs.existsSync(filePath)) {
+				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+				data.amne = readData.amne
+				socket.emit('uppdatAmne', data);
 			};
 		});
 		setInterval(function(){

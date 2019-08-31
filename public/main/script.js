@@ -97,3 +97,10 @@
 	function addLoggaUt(){
 		document.getElementById('loggaut').setAttribute('style', 'display: inline-block;')
 	};
+	function removechilds(parent){
+		if(parent.hasChildNodes()){
+			while (parent.hasChildNodes()) {
+				parent.removeChild(parent.firstChild);
+			};
+		};
+	};
