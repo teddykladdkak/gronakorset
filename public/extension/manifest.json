@@ -4,28 +4,27 @@
 	"description": "Lägger till Registrering på önskad sida. Förslagsvis utsämplingssidan för vårdpersonalen, då man samtidigt som utstämpling äver kan ge återkoppling.",
 	"permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
 	"background": {
-      "scripts": ["background.js"],
-      "persistent": false
-    },
-    "options_page": "options.html",
-    "page_action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icon/16.png",
-        "32": "icon/32.png",
-        "48": "icon/48.png",
-        "128": "icon/128.png"
-      }
-    },
-    "content_scripts": [{
-		"matches": ["https://developer.chrome.com/*"],
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"page_action": {
+		"default_popup": "popup.html",
+		"default_icon": {
+			"16": "icon/16.png",
+			"32": "icon/32.png",
+			"48": "icon/48.png",
+			"128": "icon/128.png"
+		}
+	},
+	"content_scripts": [{
+		"matches": ["https://*/*"],
 		"js": ["inject.js"]
 	}],
-    "icons": {
+	"icons": {
 		"16": "icon/16.png",
 		"32": "icon/32.png",
 		"48": "icon/48.png",
 		"128": "icon/128.png"
-    },
+	},
 	"manifest_version": 2
 }

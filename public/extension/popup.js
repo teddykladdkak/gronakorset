@@ -1,47 +1,43 @@
-/*let sparasida = document.getElementById('sparasida');
-sparasida.onclick = function(element) {
-	alert(window.location.href)
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.executeScript(
-		tabs[0].id,
-		{code: 'console.log(window.location.href);'});
-	});
-};
-chrome.storage.sync.get('color', function(data) {
-	sparasida.style.backgroundColor = data.color;
-	sparasida.setAttribute('value', data.color);
-});
-*/
 var button = document.getElementById('sparasida');
-sparasida.onclick = function(element) {
-	chrome.storage.sync.get('url', function(data) {
-		console.log(data.url);
-		var url = button.getAttribute('data-url');
-		data.url.push(url);
-		console.log(data);
-		chrome.storage.sync.set({'url': data.url}, function() {
-			console.log('Lagt till: ' + url);
-		});
-	});
-};
-
 chrome.runtime.onMessage.addListener(function(request, sender) {
-  if (request.action == "getSource") {
-  	//alert(request.source)
-    button.setAttribute('data-url', request.source);
-  }
+	if (request.action == "knapptext") {
+		if(request.text){
+			button.setAttribute('value', 'Aktivera');
+			button.setAttribute('data-todo', 'aktivera');
+		}else{
+			button.setAttribute('value', 'Av aktivera');
+			button.setAttribute('data-todo', 'avaktivera');
+		};
+	};
 });
-
 function onWindowLoad() {
   chrome.tabs.executeScript(null, {
     file: "getPagesSource.js"
   }, function() {
-    // If you try and inject into an extensions page or the webstore/NTP you'll get an error
     if (chrome.runtime.lastError) {
       button.value = 'Kan inte lägga till sida';
     }
   });
-  chrome.runtime.sendMessage("test");
 }
-
+button.onclick = function(element) {
+	if(button.getAttribute('data-todo') == 'aktivera'){
+		chrome.tabs.executeScript(null, {
+			file: "aktivera.js"
+		}, function() {
+			if (chrome.runtime.lastError) {
+				button.value = 'Kan inte lägga till sida';
+			}
+		});
+	}else if(button.getAttribute('data-todo') == 'avaktivera'){
+		chrome.tabs.executeScript(null, {
+			file: "deaktivera.js"
+		}, function() {
+			if (chrome.runtime.lastError) {
+				button.value = 'Kan inte lägga till sida';
+			}
+		});
+	}else{
+		console.log('Något gick fel...')
+	};
+};
 window.onload = onWindowLoad;

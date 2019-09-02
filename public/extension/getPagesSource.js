@@ -1,4 +1,10 @@
+var knapp;
+if(!localStorage.getItem('GRONAKORSET')){
+	knapp = true;
+}else{
+	knapp = false;
+};
 chrome.runtime.sendMessage({
-    action: "getSource",
-    source: window.location.href
+    "action": "knapptext",
+    "text": knapp
 });
