@@ -329,7 +329,7 @@ function startServer(){
 					var getAmne = '{Kunde inte hitta ID}';
 				}else{
 					if(options.id == "extention"){
-						var getAmne = '{Ämne laddas i efterhand}';
+						var getAmne = '<span id="efterhand">{Ämne laddas i efterhand}</span>';
 					}else{
 						var path = getPath('wards', options.id);
 						var filePath = path + dat + '.json';
