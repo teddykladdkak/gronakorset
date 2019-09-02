@@ -8,9 +8,8 @@
 	};
 	function loadReg(){
 		var rubrik = document.getElementById('efterhand');
-		if(!rubrik){
-			saveID();
-		}else{
+		console.log(!rubrik);
+		if(!rubrik){}else{
 			loadRubrik();
 		};
 	};
