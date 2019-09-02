@@ -7,7 +7,12 @@
 		saveID();
 	};
 	function loadReg(){
-		saveID();
+		var rubrik = document.getElementsByClassName('amne')[0].innerText;
+		if(rubrik == '{Ämne laddas i efterhand}'){
+			loadRubrik();
+		}else{
+			saveID();
+		};
 	};
 	//Funktion som kollar ifall användaren har hashtagen "#ny", om det är sant informeras användaren om att spara ID.
 	function omNy(){

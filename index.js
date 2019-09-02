@@ -328,20 +328,24 @@ function startServer(){
 				if(!options.id || options.id == ''){
 					var getAmne = '{Kunde inte hitta ID}';
 				}else{
-					var path = getPath('wards', options.id);
-					var filePath = path + dat + '.json';
-					if (fs.existsSync(filePath)) {
-						var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-						if(readData.amne == ''){
-							var getAmne = '{Ämne är inte vald}';
-						}else{
-							var getAmne = readData.amne;
-						};
+					if(options.id == "extention"){
+						var getAmne = '{Ämne laddas i efterhand}';
 					}else{
-						var def = makeDefault();
-						fs.writeFileSync(path + dat + '.json', JSON.stringify(def, null, ' '));
-						var readData = def;
-						var getAmne = '{Kunde inte hitta sparfil}';
+						var path = getPath('wards', options.id);
+						var filePath = path + dat + '.json';
+						if (fs.existsSync(filePath)) {
+							var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+							if(readData.amne == ''){
+								var getAmne = '{Ämne är inte vald}';
+							}else{
+								var getAmne = readData.amne;
+							};
+						}else{
+							var def = makeDefault();
+							fs.writeFileSync(path + dat + '.json', JSON.stringify(def, null, ' '));
+							var readData = def;
+							var getAmne = '{Kunde inte hitta sparfil}';
+						};
 					};
 				};
 				var korsHMTL = skapaKors(readData, dat);
@@ -391,26 +395,38 @@ function startServer(){
 			if(!req.query.id || req.query.id == ''){
 				res.redirect('index.html');
 			}else{
-				var path = getPath('wards', req.query.id);
-				if (fs.existsSync(path)) {
-					var options = {};
-					var filePath = path + getDatum().manad + '.json';
-					if (fs.existsSync(filePath)) {
-						var readData = fs.readFileSync(filePath, 'utf8');
-					}else{
-						var readData = makeDefFile(path);
-					};
-					options.data = JSON.parse(readData);
-					if(!req.query.dat || req.query.dat == ''){}else{
-						options.datum = req.query.dat;
-					};
-					options.id = req.query.id;
-					res.render('reg', options);
+				if(req.query.id == 'extention'){
+					res.render('reg', {"datum": getDatum().manad, "id": "extention", "data": ""});
 				}else{
-					res.redirect('index.html');
+					var rubrik = readRubrik(req.query.id, req.query.dat);
+					if(rubrik){
+						res.render('reg', rubrik);
+					}else{
+						res.redirect('index.html');
+					};
 				};
 			};
 		});
+		function readRubrik(id, dat){
+			var path = getPath('wards', id);
+			if (fs.existsSync(path)) {
+				var options = {};
+				var filePath = path + getDatum().manad + '.json';
+				if (fs.existsSync(filePath)) {
+					var readData = fs.readFileSync(filePath, 'utf8');
+				}else{
+					var readData = makeDefFile(path);
+				};
+				options.data = JSON.parse(readData);
+				if(!dat || dat == ''){}else{
+					options.datum = dat;
+				};
+				options.id = id;
+				return options;
+			}else{
+				return false;
+			};
+		};
 		app.get(['/', '/index.html'], function(req, res) {
 			if(!req.query.id || req.query.id == ''){
 				res.render('index', '')
@@ -486,6 +502,12 @@ function startServer(){
 					socket.emit('uppdatAmne', data);
 				};
 			};
+		});
+		socket.on('getRubrik', function (id) {
+			console.log(id);
+			var m = getDatum().manad;
+			var rubrik = readRubrik(id, m).data.amne;
+			socket.emit('uppdatAmne', {"id": id, "datum": m, "amne": rubrik});
 		});
 		setInterval(function(){
 			if(getSetTime()){

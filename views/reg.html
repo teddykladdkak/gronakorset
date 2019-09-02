@@ -25,6 +25,13 @@
 		//Lyssnar om server säger något
 		var socket = io.connect(geturl);
 		// Berättar för användare ifall koppling till server försvinner
+		function loadRubrik(){
+			socket.emit('getRubrik', localStorage.getItem('id'));
+			var allinput = document.getElementsByTagName('input');
+			for (var i = allinput.length - 1; i >= 0; i--) {
+				allinput[i].setAttribute('style', 'display: none;');
+			}
+		};
 		socket.on('online', function () {
 			document.getElementById('offline').removeAttribute('style');
 		});
@@ -43,6 +50,9 @@
 		});
 		socket.on('uppdatAmne', function (data) {
 			if(data.datum == getDatum().manad){
+				if(data.amne == ''){
+					data.amne = '{Ämne är inte vald}';
+				};
 				var wrapper = document.getElementsByClassName('amne')[0];
 				removechilds(wrapper);
 					var text = document.createTextNode(data.amne);
