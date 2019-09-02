@@ -8,9 +8,8 @@
 	};
 	function loadReg(){
 		var rubrik = document.getElementById('efterhand');
-		console.log(!rubrik);
 		if(!rubrik){}else{
-			loadRubrik();
+			window.location.href = window.location.href.split('?')[0] + '?id=' + localStorage.getItem('id');
 		};
 	};
 	//Funktion som kollar ifall användaren har hashtagen "#ny", om det är sant informeras användaren om att spara ID.

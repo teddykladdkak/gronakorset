@@ -503,12 +503,6 @@ function startServer(){
 				};
 			};
 		});
-		socket.on('getRubrik', function (id) {
-			console.log(id);
-			var m = getDatum().manad;
-			var rubrik = readRubrik(id, m).data.amne;
-			socket.emit('uppdatAmne', {"id": id, "datum": m, "amne": rubrik});
-		});
 		setInterval(function(){
 			if(getSetTime()){
 				socket.broadcast.emit('reloadAll', 'all');
