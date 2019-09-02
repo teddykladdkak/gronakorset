@@ -27,10 +27,6 @@ Börja med att installera NodeJS och Npm.
 För installation av extern server, får ni hitta guider på annan plats.
 
 ## Att göra
-1. Skapa Google Chrome tillägg, som aktiverar och lägger till registrera sidan i "Kom och gå".
-	1. Möjlighet att ändra storlek på iframe (vilket även sparas)
-2. Fixa bättre dokumentation.
-3. Fixa bra och tydlig ikon.
-4. Tydligare och mer designad startsida.
-5. Stresstesta.
-6. Alla korsvyer ska uppdateras när ämne ändras, detta utan att behöva ladda om sidan.
+1. Fixa bättre dokumentation.
+2. Tydligare och mer designad startsida.
+3. Stresstesta.
