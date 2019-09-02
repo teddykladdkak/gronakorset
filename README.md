@@ -28,9 +28,7 @@ För installation av extern server, får ni hitta guider på annan plats.
 
 ## Att göra
 1. Skapa Google Chrome tillägg, som aktiverar och lägger till registrera sidan i "Kom och gå".
-	1. Vid aktivering, behöver användare skriva in ID.
-	2. Ladda reg även om inte ID, hämta id när reg är laddad, för att slippa logga in vid varje omladdning.
-	3. Möjlighet att ändra storlek på iframe (vilket även sparas)
+	1. Möjlighet att ändra storlek på iframe (vilket även sparas)
 2. Fixa bättre dokumentation.
 3. Fixa bra och tydlig ikon.
 4. Tydligare och mer designad startsida.
