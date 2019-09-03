@@ -30,3 +30,5 @@ För installation av extern server, får ni hitta guider på annan plats.
 1. Fixa bättre dokumentation.
 2. Tydligare och mer designad startsida.
 3. Stresstesta.
+4. Samanställ flera ID flr korsvyn.
+5. Kolla av med Internet Explorer.
