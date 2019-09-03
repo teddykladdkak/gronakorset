@@ -22,7 +22,9 @@ function getPath(folder, id){
 	if(!id || id == ''){var end = '';}else{var end = '/';};
 	return __dirname + '/' + folder + '/' + id + end;
 };
-
+function secureText(text){
+	return text.replace('<', '').replace('>', '').replace('|', '').replace('{', '').replace('}', '');
+}
 var startConf = {
 	properties: {
 		port: {
@@ -304,7 +306,13 @@ function startServer(){
 		if(datumSplit[1] >= 13){}else{
 			var prevNext = nextAndPrevMonth(datumSplit[0], datumSplit[1]);
 		};
-		innerHMTL[0] = '<table><tbody><tr><td colspan="7" id="headinput"><input type="text" data-date="' + datumSplit[0] + '-' + datumSplit[1] + '" value="' + data.amne + '" onchange="updateAmne(\'' + datumSplit[0] + '-' + datumSplit[1] + '\', this)"/></td></tr><tr><td onclick="next(\'' + prevNext.prev + '\')"><-</td><td colspan="5">' + datumSplit[0] + '-' + datumSplit[1] + '</td><td onclick="next(\'' + prevNext.next + '\')">-></td></tr><tr><td colspan="2" rowspan="2"></td>' + innerHMTL[0];
+		console.log(data);
+		if(data.id == 'all'){
+			var headelem = data.amne.join('; ');
+		}else{
+			var headelem = '<input type="text" data-date="' + datumSplit[0] + '-' + datumSplit[1] + '" value="' + data.amne + '" onchange="updateAmne(\'' + datumSplit[0] + '-' + datumSplit[1] + '\', this)"/>';
+		};
+		innerHMTL[0] = '<table><tbody><tr><td colspan="7" id="headinput">' + headelem + '</td></tr><tr><td onclick="next(\'' + prevNext.prev + '\')"><-</td><td colspan="5">' + datumSplit[0] + '-' + datumSplit[1] + '</td><td onclick="next(\'' + prevNext.next + '\')">-></td></tr><tr><td colspan="2" rowspan="2"></td>' + innerHMTL[0];
 		innerHMTL[3] = '<td colspan="2" rowspan="2"></td></tr><tr>' + innerHMTL[3];
 		innerHMTL[6] = '</tr><tr>' + innerHMTL[6];
 		innerHMTL[13] = '</tr><tr>' + innerHMTL[13];
@@ -331,24 +339,14 @@ function startServer(){
 					if(options.id == "extention"){
 						var getAmne = '<span id="efterhand">{Ämne laddas i efterhand}</span>';
 					}else{
-						var path = getPath('wards', options.id);
-						var filePath = path + dat + '.json';
-						if (fs.existsSync(filePath)) {
-							var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-							if(readData.amne == ''){
-								var getAmne = '{Ämne är inte vald}';
-							}else{
-								var getAmne = readData.amne;
-							};
+						if(options.data.amne == ''){
+							var getAmne = '{Ämne är inte vald}';
 						}else{
-							var def = makeDefault();
-							fs.writeFileSync(path + dat + '.json', JSON.stringify(def, null, ' '));
-							var readData = def;
-							var getAmne = '{Kunde inte hitta sparfil}';
+							var getAmne = options.data.amne;
 						};
 					};
 				};
-				var korsHMTL = skapaKors(readData, dat);
+				var korsHMTL = skapaKors(options.data, dat);
 				var rendered = content.toString()
 					.replace('#kors#', korsHMTL)
 					.replace('#amne#', getAmne)
@@ -360,7 +358,7 @@ function startServer(){
 		app.get('/nyid.html', function(req, res) {
 			var recID =  req.query.mail;
 			var id = makeNewId();
-			var path = getPath('wards', id);
+			var path = getPath('wards', parseInt(id));
 			if(!recID || recID == '' || recID == undefined){
 				console.log('Av någon anledning skickade inte användare med sin mail.')
 			}else{
@@ -409,7 +407,7 @@ function startServer(){
 			};
 		});
 		function readRubrik(id, dat){
-			var path = getPath('wards', id);
+			var path = getPath('wards', parseInt(id));
 			if (fs.existsSync(path)) {
 				var options = {};
 				var filePath = path + getDatum().manad + '.json';
@@ -438,7 +436,7 @@ function startServer(){
 						return;
 					};
 				};
-				var path = getPath('wards', req.query.id);
+				var path = getPath('wards', parseInt(req.query.id));
 				if (fs.existsSync(path)) {
 					var options = {};
 					if(!req.query.dat || req.query.dat == ''){
@@ -462,12 +460,46 @@ function startServer(){
 				};
 			};
 		});
+		app.get('/org.html', function(req, res) {
+			if(!req.query.id || req.query.id == ''){
+				res.render('index', '')
+			}else{
+				var options = {};
+				var nyData = makeDefault();
+				nyData.amne = [];
+				var allIDs = req.query.id.split(',');
+				if(!req.query.dat || req.query.dat == ''){
+					var datum = getDatum().manad;
+				}else{
+					var datum = req.query.dat;
+				};
+				var days = daysInMonth(datum.split('-')[1], datum.split('-')[0]);
+				for (var i = allIDs.length - 1; i >= 0; i--) {
+					var path = getPath('wards', parseInt(allIDs[i]));
+					var filePath = path + datum + '.json';
+					if (fs.existsSync(filePath)) {
+						var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+						for (var a = 0; a < days; a++){
+							nyData[a + 1] = nyData[a + 1].concat(readData[a + 1]);
+						};
+						nyData.amne.push(readData.amne);
+					}else{
+						console.log('Kan inte ladda med ID: ' + allIDs[i]);
+					};
+				};
+				options.datum = datum;
+				options.data = nyData;
+				options.data.id = 'all';
+				options.id = 'all';
+				res.render('org', options);
+			};
+		});
 	app.use(express.static(path.join(__dirname, "public")));
 
 	io.sockets.on('connection', function (socket, username) {
 		socket.emit('online', '');
 		socket.on('sendreg', function (data) {
-			var path = getPath('wards', data.id);
+			var path = getPath('wards', parseInt(data.id));
 			var filePath = path + getDatum().manad + '.json';
 			if (fs.existsSync(filePath)) {
 				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -481,11 +513,11 @@ function startServer(){
 		});
 		
 		socket.on('nyttamne', function (data) {
-			var path = getPath('wards', data.id);
+			var path = getPath('wards', parseInt(data.id));
 			var filePath = path + data.datum + '.json';
 			if (fs.existsSync(filePath)) {
 				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-				readData.amne = data.amne;
+				readData.amne = secureText(data.amne);
 				fs.writeFileSync(path + data.datum + '.json', JSON.stringify(readData, null, ' '));
 				amneToSync.push({"id": data.id, "datum": data.datum});
 				socket.broadcast.emit('uppdatera', amneToSync.length);
@@ -494,7 +526,7 @@ function startServer(){
 		socket.on('uppdatAmne', function (info) {
 			if(info.id == amneToSync[info.num - 1].id){
 				var data = {'id': info.id};
-				var path = getPath('wards', data.id);
+				var path = getPath('wards', parseInt(data.id));
 				data.datum = amneToSync[info.num - 1].datum;
 				var filePath = path + data.datum + '.json';
 				if (fs.existsSync(filePath)) {

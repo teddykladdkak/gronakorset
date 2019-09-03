@@ -54,8 +54,10 @@ input, button {
 	display: none;
 }
 #loggaut{
-	margin-top: 10px;
 	display: none;
+}
+#korsWrapper input[type=button] {
+	margin-top: 10px;
 }
 .amne {
 	text-align: center;

@@ -35,6 +35,10 @@
 	};
 
 //Knappar
+	function oppnaFlera(){
+		var id = prompt("Skriv önskade IDn med \",\" mellan. (ex. \"123456,654321\")", "64362,10589");
+		window.open(encodeURI('/org.html?id=' + id),'_self')
+	};
 	//Öppnar vyn för gröna korset.
 	function loggaIn(){
 		var id = document.getElementById('avdid').value;
