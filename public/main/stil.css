@@ -89,6 +89,7 @@ input, button {
 	text-align: center;
 	font-weight: bold;
 	display: none;
+	padding: 10px 0px;
 }
 #loggaut{
 	display: none;
