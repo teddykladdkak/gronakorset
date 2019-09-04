@@ -8,31 +8,37 @@
 	<div id="start">
 		<h1>Välkommen till Gröna korset!</h1>
 		<table>
+			<tr class="preview">
+				<td><img src="img/kors.png"></td>
+				<td><img src="img/reg.png"></td>
+			</tr>
+		<table>
 			<tr class="start">
 				<td>
-					<input type="text" id="avdid">
+					<input type="text" id="avdid" placeholder="ID">
 				</td>
 				<td>
-					<input type="button" value="Logga in Översikt" onclick="loggaIn();">
-					<input type="button" value="Logga in Registrering" onclick="registrering();">
+					<a class="button" href="javascript:loggaIn();">Logga in Översikt</a><br/>
+					<a class="button" href="javascript:registrering();">Logga in Registrering</a>
 				</td>
 				<td>
-					<input type="button" value="Lägg till ny avdelning" onclick="showHide('nyanv', 'start');">
+					<a class="button" href="javascript:showHide('nyanv', 'start');sel('mail');">Lägg till ny avdelning</a>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3">
-					<a href="gronakorset.crx" class="button" download=""><button>Ladda ner Goggle Chrome Tillägg</button></a>
-					<input type="button" value="Se flera avdelingar" onclick="oppnaFlera();">
+					<a href="gronakorset.crx" class="button" download="">Ladda ner Goggle Chrome Tillägg</a>
+					<a class="button" href="javascript:oppnaFlera();">Se flera avdelingar</a>
 				</td>
 			</tr>
 		</table>
-		<p>När du klickar på "Lägg till ny avdelning" kommer du tilldelas ett unikt ID, som enbart är för dig och din avdelning. Detta ID sparas även på servern för att kunna hänvisa till er information, inget mer sparas för att kunna identifiera er. Det innebär att skulle ni tappa bort ID, kommer informationen inte att kunna återskapas. Vidare sparar servern i vart ID val av färg i Registrering, men inte vem som klickade eller när.</p>
+		<p>När du klickar på "Lägg till ny avdelning" kommer du tilldelas ett unikt ID, som enbart är för dig och din avdelning. Detta ID sparas på servern för att kunna hänvisa till eran information. Skulle ni tappa bort ID kommer informationen inte att kunna återskapas. Vidare sparar servern i vart ID val av färg när registreringar genomförs, men inte vem som klickade eller när. Servern sparar slutligen specificerat ämne för var månad, för att ge mening till registreringarna.</p>
 	</div>
 	<div id="nyanv">
-		<p>Om du önskar få ID på din mail, skriv den nedanför.</p>
+		<h1>Ny avdelning</h1>
+		<p>Om du önskar få ID på din mail, skriv den nedanför, annars är det bara att lämna den tom. Göm bara inte att spara det ID du tilldelas.</p>
 		<input type="text" placeholder="Mail" id="mail"><br/>
-		<input type="button" value="Tillbaka" onclick="showHide('start', 'nyanv');"><input type="button" value="Lägg till ny avdelning" onclick="nyID();">
+		<a class="button" href="javascript:showHide('start', 'nyanv');sel('avdid');">Tillbaka</a><a class="button" href="javascript:nyID();">Lägg till ny avdelning</a>
 	</div>
 </body>
 </html>

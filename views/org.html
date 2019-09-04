@@ -8,8 +8,7 @@
 	<div id="offline">Offline!</div>
 	<div id="korsWrapper">
 		#kors#
-		<input type="button" onclick="tillbaka();" value="Tillbaka"/>
-		<span style="display: none;"><input type="button" id="loggaut" onclick="loggaUT();" value="Logga ut"/></span>
+		<a class="button" href="/index.html">Tillbaka</a>
 	</div>
 	<script src="socket.io/socket.io.js"></script>
 	<script type="text/javascript">
@@ -26,6 +25,9 @@
 		});
 		socket.on('err', function(data) {console.log('Error!')});
 		socket.on('message', function (data) {console.log(data);});
+		socket.on('registrerat', function (data) {
+			console.log(data);
+		});
 		/*
 		socket.on('registrerat', function (data) {
 			if(getUrlParameter('id') == data.id){

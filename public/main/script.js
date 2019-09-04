@@ -1,6 +1,7 @@
 //OnLoad funktioner
 	function loadStart(){
 		loadID();
+		sel('avdid');
 	};
 	function loadKors(){
 		omNy();
@@ -75,6 +76,9 @@
 	};
 
 //Grundfunktioner
+	function sel(id){
+		document.getElementById(id).select();
+	};
 	//Datum funktion.
 	function addzero(number){if(number <= 9){return "0" + number;}else{return number;};};
 	function getDatum(dateannan, timeannan, milisecsave){
