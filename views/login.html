@@ -26,8 +26,14 @@
 		});
 		socket.on('err', function(data) {console.log('Error!')});
 		socket.on('message', function (data) {console.log(data);});
+		//Någon har uppdaterat en registrering på servern, klient skickar sitt ID för kontroll
+		socket.on('checkreg', function (num) {
+			socket.emit('sendreg', {"id": getUrlParameter('id'), "num": num});
+		});
+		//Uppdatering stämmer med ID, alltså får nu klient information.
 		socket.on('registrerat', function (data) {
 			if(getUrlParameter('id') == data.id){
+				console.log('Det stämde!');
 				var datid = numToText(data.datum);
 				var datIDElem = document.getElementsByClassName(datid)[0];
 					datIDElem.setAttribute('class', datIDElem.getAttribute('class').split(' ')[0] + ' ' + data.color);
@@ -36,9 +42,11 @@
 		function updateAmne(datum, elem){
 			socket.emit('nyttamne', {'amne': elem.value, 'datum': datum, 'id': getUrlParameter('id')});
 		};
+		//Någon har uppdaterat sitt ämne på servern. Klient tillfrågas om ID.
 		socket.on('uppdatera', function (num) {
 			socket.emit('uppdatAmne', {'id': getUrlParameter('id'), 'num': num});
 		});
+		//ID stämmer med ämne som uppdaterats, därför skickas info för att uppdatera.
 		socket.on('uppdatAmne', function (data) {
 			var amneinput = document.getElementById('headinput').getElementsByTagName('input')[0];
 			var datum = amneinput.getAttribute('data-date');
@@ -46,6 +54,7 @@
 				amneinput.value = data.amne;
 			};
 		});
+		//Sida nollställs för att uppdateras till ny dag/månad.
 		socket.on('reloadAll', function (data) {
 			location.reload();
 		});

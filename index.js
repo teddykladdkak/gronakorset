@@ -497,20 +497,25 @@ function startServer(){
 
 	io.sockets.on('connection', function (socket, username) {
 		socket.emit('online', '');
+		socket.on('checkreg', function (data) {
+			amneToSync.push({"id": data.id, "num": data.num});
+			socket.broadcast.emit('checkreg', amneToSync.length);
+		});
 		socket.on('sendreg', function (data) {
-			var path = getPath('wards', parseInt(data.id));
-			var filePath = path + getDatum().manad + '.json';
-			if (fs.existsSync(filePath)) {
-				var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-				var datum = getDatum().datum;
-				readData[parseInt(datum.split('-')[2])].push(parseInt(data.num));
-				var color = countColor(readData[parseInt(datum.split('-')[2])]);
-				fs.writeFileSync(path + getDatum().manad + '.json', JSON.stringify(readData, null, ' '));
-				socket.emit('registrerat', 'Värde registrerat');
-				socket.broadcast.emit('registrerat', {'varde': data.num, 'datum': datum, 'color': color, 'id': data.id});
+			if(data.id == amneToSync[parseInt(data.num) - 1].id){
+				var nummer = amneToSync[parseInt(data.num) - 1].num;
+				var path = getPath('wards', parseInt(data.id));
+				var filePath = path + getDatum().manad + '.json';
+				if (fs.existsSync(filePath)) {
+					var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+					var datum = getDatum().datum;
+					readData[parseInt(datum.split('-')[2])].push(parseInt(nummer));
+					var color = countColor(readData[parseInt(datum.split('-')[2])]);
+					fs.writeFileSync(path + getDatum().manad + '.json', JSON.stringify(readData, null, ' '));
+					socket.emit('registrerat', {'varde': nummer, 'datum': datum, 'color': color, 'id': data.id});
+				};
 			};
 		});
-		
 		socket.on('nyttamne', function (data) {
 			var path = getPath('wards', parseInt(data.id));
 			var filePath = path + data.datum + '.json';

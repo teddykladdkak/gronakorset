@@ -3,6 +3,17 @@
 <head>
 	<title>GrönaKorset Registrering</title>
 	#head#
+	<style type="text/css">
+		@media screen and (max-width: 400px), (min-width: 420px) and (max-width: 600px) {
+			.table, .table div, .table div div {
+				display: block;
+				width: 100%;
+			}
+			.table div div {
+				padding: 30px 0px;
+			}
+		}
+	</style>
 </head>
 <body onload="loadReg();">
 	<div id="offline">Offline!</div>
@@ -34,7 +45,7 @@
 		socket.on('message', function (data) {console.log(data);});
 		function reg(num){
 			var tosend = {'num': num, 'id': getUrlParameter('id')};
-			socket.emit('sendreg', tosend);
+			socket.emit('checkreg', tosend);
 		};
 		socket.on('uppdatera', function (num) {
 			socket.emit('uppdatAmne', {'id': getUrlParameter('id'), 'num': num});
