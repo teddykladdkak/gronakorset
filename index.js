@@ -306,7 +306,6 @@ function startServer(){
 		if(datumSplit[1] >= 13){}else{
 			var prevNext = nextAndPrevMonth(datumSplit[0], datumSplit[1]);
 		};
-		console.log(data);
 		if(data.id == 'all'){
 			var headelem = data.amne.join('; ');
 		}else{
@@ -426,7 +425,7 @@ function startServer(){
 				return false;
 			};
 		};
-		app.get(['/', '/index.html'], function(req, res) {
+		app.get(['/', '/index.html', '/kors.html'], function(req, res) {
 			if(!req.query.id || req.query.id == ''){
 				res.render('index', '')
 			}else{

@@ -43,7 +43,7 @@
 	//Öppnar vyn för gröna korset.
 	function loggaIn(){
 		var id = document.getElementById('avdid').value;
-		window.open(encodeURI('/index.html?id=' + id),'_self')
+		window.open(encodeURI('/kors.html?id=' + id),'_self')
 	};
 	//Öppnar vyn för registrering
 	function registrering(){
