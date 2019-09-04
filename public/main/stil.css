@@ -1,6 +1,9 @@
 html{
 	background-color: #333;
 }
+.button, input, h1, h2 {
+	font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+}
 #start, #nyanv {
 	background-color: #FFF;
 	padding: 10px;
@@ -160,4 +163,36 @@ input, button {
 }
 .preview img {
 	width: 100%;
+}
+
+
+
+html {
+	height: 100%;
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+body {
+	position: relative;
+	margin: 0;
+	padding:0px;
+	padding-bottom: 3rem;
+	min-height: 100%;
+}
+#footer{
+	color: #FFF;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1rem;
+	text-align: center;
+	font-size: 10px;
+}
+#footer a, #footer a:hover{
+	color: #FFF;
 }

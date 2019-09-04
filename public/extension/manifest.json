@@ -1,7 +1,7 @@
 {
 	"name": "Grönakorset Registrering",
 	"version": "1.0",
-	"description": "Lägger till Registrerings vyn på önskad sida, vilket svarar mot (https://gronakorset.teddyprojekt.se).",
+	"description": "Lägger till Registrerings vyn på önskad sida, vilket svarar mot (http://gronakorset.tk).",
 	"permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
 	"background": {
 		"scripts": ["background.js"],
