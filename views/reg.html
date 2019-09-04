@@ -27,7 +27,7 @@
 			<div onclick="reg('4')">Dåligt</div>
 		</div>
 	</div>
-	<a class="button" href="/index.html">Tillbaka</a>
+	<a class="button" href="javascript:tillbaka();">Tillbaka</a>
 	<script src="socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		var geturl = window.location.href.replace('http://', '').replace('https://', '').split('/')[0];
@@ -35,11 +35,10 @@
 		var socket = io.connect(geturl);
 		// Berättar för användare ifall koppling till server försvinner
 		socket.on('online', function () {
-			document.getElementById('offline').removeAttribute('style');
+			connect();
 		});
 		socket.on('disconnect', function () {
-			document.getElementById('offline').setAttribute('style', 'display: block;');
-			location.reload();
+			disconnect();
 		});
 		socket.on('err', function(data) {console.log('Error!')});
 		socket.on('message', function (data) {console.log(data);});

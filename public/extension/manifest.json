@@ -1,7 +1,7 @@
 {
 	"name": "Grönakorset Registrering",
 	"version": "1.0",
-	"description": "Lägger till Registrering på önskad sida. Förslagsvis utsämplingssidan för vårdpersonalen, då man samtidigt som utstämpling äver kan ge återkoppling.",
+	"description": "Lägger till Registrerings vyn på önskad sida, vilket svarar mot (https://gronakorset.teddyprojekt.se).",
 	"permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
 	"background": {
 		"scripts": ["background.js"],

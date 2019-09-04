@@ -13,6 +13,19 @@
 			window.location.href = window.location.href.split('?')[0] + '?id=' + localStorage.getItem('id');
 		};
 	};
+	var firstTime = true;
+	function connect(){
+		if(firstTime){
+			document.getElementById('offline').removeAttribute('style');
+			firstTime = false;
+		}else{
+			location.reload();
+		};
+	};
+	function disconnect(){
+		document.getElementById('offline').setAttribute('style', 'display: block;');
+		//location.reload();
+	};
 	//Funktion som kollar ifall användaren har hashtagen "#ny", om det är sant informeras användaren om att spara ID.
 	function omNy(){
 		if(location.hash){
