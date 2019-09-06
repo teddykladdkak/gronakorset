@@ -309,7 +309,7 @@ function startServer(){
 		if(data.id == 'all'){
 			var headelem = data.amne.join('; ');
 		}else{
-			var headelem = '<input type="text" data-date="' + datumSplit[0] + '-' + datumSplit[1] + '" value="' + data.amne + '" onchange="updateAmne(\'' + datumSplit[0] + '-' + datumSplit[1] + '\', this)"/>';
+			var headelem = '<input type="text" data-date="' + datumSplit[0] + '-' + datumSplit[1] + '" value="' + data.amne + '" onchange="updateAmne(\'' + datumSplit[0] + '-' + datumSplit[1] + '\', this)" placeholder="Skriv ämne för månad här"/>';
 		};
 		innerHMTL[0] = '<table><tbody><tr><td colspan="7" id="headinput">' + headelem + '</td></tr><tr><td onclick="next(\'' + prevNext.prev + '\')"><-</td><td colspan="5">' + datumSplit[0] + '-' + datumSplit[1] + '</td><td onclick="next(\'' + prevNext.next + '\')">-></td></tr><tr><td colspan="2" rowspan="2"></td>' + innerHMTL[0];
 		innerHMTL[3] = '<td colspan="2" rowspan="2"></td></tr><tr>' + innerHMTL[3];
