@@ -133,3 +133,20 @@
 			};
 		};
 	};
+	function showVid(link, elem){
+		var parent = elem.parentElement;
+		removechilds(parent);
+		var vid = document.createElement('video');
+			vid.setAttribute('width', '100%');
+			vid.setAttribute('controls', '');
+			var todo = [{'type': 'video/mp4', 'src': '.mp4'}, {'type': 'video/ogg', 'src': '.Ogg'}, {'type': 'video/webm', 'src': '.webm'}];
+			for (var i = todo.length - 1; i >= 0; i--) {
+				var webm = document.createElement('source');
+					webm.setAttribute('src', link + todo[i].src);
+					webm.setAttribute('type', todo[i].type);
+				vid.appendChild(webm);
+			};
+			var txt = document.createTextNode('Your browser does not support the video tag.');
+			vid.appendChild(txt);
+		parent.appendChild(vid);
+	}

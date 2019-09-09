@@ -51,9 +51,11 @@ a.button{
   background-size: 100%;
   transition: background 0s;
 }
-/*.button:hover {
-	background-color: #EEE;
-}*/
+.button svg {
+	height: 15px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
 input, button {
 	font-size: large;
 	box-sizing : border-box;
