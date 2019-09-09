@@ -87,10 +87,6 @@
 		document.getElementById(visa).setAttribute('style', 'display: block;');
 		document.getElementById(dolj).setAttribute('style', 'display: none;');
 	};
-	var removeActive;
-	function removeActiveFunc() {
-		removeActive = setTimeout(function(){ document.getSelection().removeAllRanges(); }, 3000);
-	};
 //Grundfunktioner
 	function sel(id){
 		document.getElementById(id).select();
