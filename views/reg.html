@@ -44,6 +44,8 @@
 		socket.on('message', function (data) {console.log(data);});
 		function reg(num){
 			var tosend = {'num': num, 'id': getUrlParameter('id')};
+			clearTimeout(removeActive);
+			removeActiveFunc();
 			socket.emit('checkreg', tosend);
 		};
 		socket.on('uppdatera', function (num) {
