@@ -157,8 +157,10 @@ input, button {
 	-ms-transition: all 150ms linear;
 	transition: all 150ms linear;
 }
-#nyanv {
+#install, #nyanv {
 	display: none;
+}
+#nyanv {
 	text-align: center;
 }
 .preview img {
