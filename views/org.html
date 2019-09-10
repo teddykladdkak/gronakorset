@@ -24,6 +24,9 @@
 		});
 		socket.on('err', function(data) {console.log('Error!')});
 		socket.on('message', function (data) {console.log(data);});
+		socket.on('checkreg', function (num) {
+			location.reload();
+		});
 		/*
 		//Någon har uppdaterat en registrering på servern, klient skickar sitt ID för kontroll
 		socket.on('checkreg', function (num) {
