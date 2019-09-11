@@ -16,6 +16,12 @@ html{
 #korsWrapper table {
 	background-color: #FFF;
 }
+ul {
+	margin-top: 0px;
+}
+h3{
+	margin-bottom: 0px;
+}
 .amne {
 	color: #FFF;
 }

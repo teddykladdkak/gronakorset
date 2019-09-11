@@ -33,31 +33,37 @@
 				</td>
 			</tr>
 		</table>
-		<p>När du klickar på "Lägg till ny avdelning" kommer du tilldelas ett unikt ID, som enbart är för dig och din avdelning. Detta ID sparas på servern för att kunna hänvisa till eran information. Skulle ni tappa bort ID kommer informationen inte att kunna återskapas. Vidare sparar servern i vart ID val av färg när registreringar genomförs, men inte vem som klickade eller när. Servern sparar slutligen specificerat ämne för var månad, för att ge mening till registreringarna.</p>
+		<h3>Servern sparar:</h3>
+		<ul>
+			<li>Ett unikt ID för att kunna identifiera dig eller din avdelning.</li>
+			<li>Du får såklart ha hur många IDn som du vill, bara du kommer ihåg och använder dem.</li>
+			<li>Alla registreringar, när användaren gör ett val mellan "bra-dålig" sparas i form av siffra från 0-4, för akutellt datum. Klockslaget när registreringen är genomförd sparas inte.</li>
+			<li>Detta är ett innovationsprojekt och risk finns att data kan rensas, eller att programmet tillfälligt inte kan fungera. Önskas stabilare drift, finns källkod att ladda ner via GitHub.</li>
+			<li>Mail vid registrering är INTE obligatoriskt, används enbart för att skicka EN mail till dig med skapat ID, för framtida referens, ifall den skulle komma bort. Din mail sparas inte.</li>
+		</ul>
 	</div>
 	<div id="nyanv" class="wrapper">
 		<h1>Ny avdelning</h1>
-		<p>Om du önskar få ID på din mail, skriv den nedanför, annars är det bara att lämna den tom. Göm bara inte att spara det ID du tilldelas.</p>
+		<p>Om du önskar få ID på din mail, skriv den nedanför, annars är det bara att lämna den tom. Göm inte att spara det ID du tilldelas, kan inte kopplas till dig i efterhand.</p>
 		<input type="text" placeholder="Mail" id="mail"><br/>
 		<a class="button" href="javascript:showHide('start', 'nyanv');sel('avdid');">#svgone#0 0 448 512#svgtwo#M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zM259.515 124.485l-123.03 123.03c-4.686 4.686-4.686 12.284 0 16.971l123.029 123.029c7.56 7.56 20.485 2.206 20.485-8.485V132.971c.001-10.691-12.925-16.045-20.484-8.486z#svgthree#Tillbaka</a><a class="button" href="javascript:nyID();">#svgone#0 0 640 512#svgtwo#M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z#svgthree#Lägg till ny avdelning</a>
 	</div>
 	<div id="install" class="wrapper">
-		<h1>Installera Google Chrome Tillägg</h1>
-		<p>
-			<ol>
-				<li>Ladda ner ".zip" filen.<br/><a href="https://github.com/teddykladdkak/gronakorset-extension/archive/master.zip" class="button" download>#svgone#0 0 384 512#svgtwo#M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm76.45 211.36l-96.42 95.7c-6.65 6.61-17.39 6.61-24.04 0l-96.42-95.7C73.42 337.29 80.54 320 94.82 320H160v-80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v80h65.18c14.28 0 21.4 17.29 11.27 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z#svgthree#"extension.zip"</a><a href="https://github.com/teddykladdkak/gronakorset-extension" class="button">#svgone#0 0 496 512#svgtwo#M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z#svgthree#Källkod</a></li>
-				<li>Packa upp mappen på önskad plats, på datorn.</li>
-				<li>Öppna "chrome://extensions/" i ny flik (i webbläsaren).</li>
-				<li>Aktivera Programmerarläge, uppe i högra hörnet.</li>
-				<li>Klicka på "Läser in okomprimerat tillägg".</li>
-				<li>Hitta mappen på datorn.</li>
-				<li>Klicka på "Välj mapp".</li>
-				<li>Öppna önskad sida.</li>
-				<li>Klicka på GrönaKorset ikonen uppe i menyn.</li>
-				<li>Klicka på knappen "aktivera".</li>
-			</ol>
-			<span><span onclick="showVid('instruk/instruktioner', this);" class="button">#svgone#0 0 576 512#svgtwo#M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z#svgthree#Instruktionsfilm...</span></span>
-		</p>
+		<h1>Installera Webbläsare Tillägg</h1>
+		<p>Testad för Google Chrome & Edge Beta</p>
+		<ol>
+			<li>Ladda ner ".zip" filen.<br/><a href="https://github.com/teddykladdkak/gronakorset-extension/archive/master.zip" class="button" download>#svgone#0 0 384 512#svgtwo#M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm76.45 211.36l-96.42 95.7c-6.65 6.61-17.39 6.61-24.04 0l-96.42-95.7C73.42 337.29 80.54 320 94.82 320H160v-80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v80h65.18c14.28 0 21.4 17.29 11.27 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z#svgthree#"extension.zip"</a><a href="https://github.com/teddykladdkak/gronakorset-extension" class="button">#svgone#0 0 496 512#svgtwo#M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z#svgthree#Källkod</a></li>
+			<li>Packa upp mappen på önskad plats, på datorn.</li>
+			<li>Öppna "chrome://extensions/" i ny flik (i webbläsaren).</li>
+			<li>Aktivera Programmerarläge, uppe i högra hörnet.</li>
+			<li>Klicka på "Läser in okomprimerat tillägg".</li>
+			<li>Hitta mappen på datorn.</li>
+			<li>Klicka på "Välj mapp".</li>
+			<li>Öppna önskad sida.</li>
+			<li>Klicka på GrönaKorset ikonen uppe i menyn.</li>
+			<li>Klicka på knappen "aktivera".</li>
+		</ol>
+		<span><span onclick="showVid('instruk/instruktioner', this);" class="button">#svgone#0 0 576 512#svgtwo#M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z#svgthree#Instruktionsfilm...</span></span><br/>
 		<a class="button" href="javascript:showHide('start', 'install');sel('avdid');">#svgone#0 0 448 512#svgtwo#M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zM259.515 124.485l-123.03 123.03c-4.686 4.686-4.686 12.284 0 16.971l123.029 123.029c7.56 7.56 20.485 2.206 20.485-8.485V132.971c.001-10.691-12.925-16.045-20.484-8.486z#svgthree#Tillbaka</a>
 	</div>
 	#footer#
