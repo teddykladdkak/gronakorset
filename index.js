@@ -358,6 +358,28 @@ function startServer(){
 			})
 		}).set('views', './views').set('view engine', 'html').use(express.static('public'))
 
+
+		app.get('/year.json', function (req, res) {
+			var id =  req.query.id;
+			if(!id || id == ''){res.jsonp({"err": "ID saknas!"});}else{
+				var tosend = [];
+				var d = new Date();
+				var y = d.getFullYear();
+				var m = d.getMonth() + 1;
+				var path = getPath('wards', parseInt(id));
+				for (var i = 0; i < m; i++){
+					var filePath = path + y + '-' + addzero(i + 1) + '.json';
+					if (fs.existsSync(filePath)) {
+						var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+						tosend.push({"dat": y + '-' + addzero(i + 1), "data": readData});
+					};
+				};
+				res.jsonp(tosend);
+			};
+		});
+		app.get('/year.html', function(req, res) {
+			res.render('year', '');
+		});
 		app.get('/nyid.html', function(req, res) {
 			var recID =  req.query.mail;
 			var id = makeNewId();

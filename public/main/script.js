@@ -114,6 +114,11 @@
 		localStorage.setItem('gronaKorsetFlera', allWards.join(','));
 		window.open(encodeURI('/org.html?id=' + allWards.join(',')),'_self')
 	};
+	//Öppnar vyn för året
+	function openYear(){
+		var id = document.getElementById('avdid').value;
+		window.open(encodeURI('/year.html?id=' + id),'_self')
+	};
 	//Öppnar vyn för gröna korset.
 	function loggaIn(){
 		var id = document.getElementById('avdid').value;

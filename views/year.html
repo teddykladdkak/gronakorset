@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Year View</title>
+	#head#
+	<script type="text/javascript">
+		function daysInMonth(month, year){ 
+			return new Date(year, month, 0).getDate(); 
+		};
+		function addTd(DagNum, d, m, y){
+			var wrapper = document.getElementById('years');
+				var parent = wrapper.getElementsByTagName('tr')[parseInt(DagNum)]
+					var td = document.createElement('td');
+						td.setAttribute('id', numToText(y + '-' + addzero(m + 1) + addzero(d)))
+						if(d == 1){
+							var d = d + '/' + (m + 1);
+						};
+						var tdtext = document.createTextNode(d);
+						td.appendChild(tdtext);
+					parent.appendChild(td);
+		};
+		function loadYear(){
+			var d = new Date();
+			var y = d.getFullYear();
+			var m = d.getMonth() + 1;
+			var blankDays = new Date(y, 0, 0).getDay();
+			for (var i = 0; i < blankDays; i++){
+				addTd(i, '', 0);
+			};
+			for (var i = 0; i < m; i++){
+				var dagar = daysInMonth((i + 1), y);
+				for (var a = 0; a < dagar; a++){
+					var firstDay = new Date(y, i, a).getDay();
+					addTd(firstDay, a + 1, i, y);
+				};
+			};
+			getData();
+		};
+		function countColor(array){
+			var count = 0;
+			for (var a = 0; a < array.length; a++){
+				count = count + array[a];
+			};
+			if(array.length == 0){
+				var color = 'white';
+			}else{
+				var result = Math.round(count / array.length);
+				if(result == 0){
+					var color = 'green';
+				}else if(result == 1){
+					var color = 'lightgreen';
+				}else if(result == 2){
+					var color = 'yellow';
+				}else if(result == 3){
+					var color = 'orange';
+				}else if(result == 4){
+					var color = 'red';
+				};
+			};
+			return color;
+		};
+		function getData(){
+			var id = getUrlParameter('id');
+			if(!id || id == ''){
+				document.getElementById('yearswrapper').setAttribute('style', 'display: none;')
+				document.getElementById('wrapper').createTextNode('ID är inte specificerad.')
+			}else{
+			var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						var data = JSON.parse(this.responseText);
+						console.log(data);
+						for (var i = data.length - 1; i >= 0; i--) {
+							var antalD = daysInMonth(data[i].dat.split('-')[1], data[i].dat.split('-')[0]);
+							for (var a = antalD - 1; a >= 0; a--) {
+								//antalD[a]
+								console.log(data[i].data[a + 1])
+								document.getElementById(numToText(data[i].dat + '-' + addzero(a + 1))).setAttribute('class', countColor(data[i].data[a + 1]));
+							};
+						};
+					};
+				};
+				xmlhttp.open("GET", "year.json?id=" + id, true);
+				xmlhttp.send();
+			};
+		};
+	</script>
+	<style type="text/css">
+		.yeartbl {
+			border-collapse: collapse;
+			background-color: #FFF;
+			margin-right: auto;
+			margin-left: auto;
+		}
+		.yeartbl td {
+			border: solid 1px #000;
+			text-align: center;
+			min-width: 30px;
+			min-height: 30px;
+		}
+		.yeartbl td:first-child {
+			font-weight: bold;
+		}
+		#tablewrapper {
+			overflow-y: auto;
+		}
+		#yearswrapper{
+			position: relative;
+			margin-bottom: 30px;
+		}
+		#daysTbl {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+
+	</style>
+</head>
+<body onload="loadYear();">
+	<div class="wrapper">
+		<h1>Sammanställning av året</h1>
+		<div id="yearswrapper">
+			<table class="yeartbl" id="daysTbl">
+				<tr>
+					<td>M</td>
+				</tr>
+				<tr>
+					<td>T</td>
+				</tr>
+				<tr>
+					<td>O</td>
+				</tr>
+				<tr>
+					<td>T</td>
+				</tr>
+				<tr>
+					<td>F</td>
+				</tr>
+				<tr>
+					<td>L</td>
+				</tr>
+				<tr>
+					<td>S</td>
+				</tr>
+			</table>
+			<div id="tablewrapper">
+				<table class="yeartbl" id="years">
+					<tr>
+						<td>M</td>
+					</tr>
+					<tr>
+						<td>T</td>
+					</tr>
+					<tr>
+						<td>O</td>
+					</tr>
+					<tr>
+						<td>T</td>
+					</tr>
+					<tr>
+						<td>F</td>
+					</tr>
+					<tr>
+						<td>L</td>
+					</tr>
+					<tr>
+						<td>S</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<a class="button" href="javascript:tillbaka();">#svgone#0 0 448 512#svgtwo#M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zM259.515 124.485l-123.03 123.03c-4.686 4.686-4.686 12.284 0 16.971l123.029 123.029c7.56 7.56 20.485 2.206 20.485-8.485V132.971c.001-10.691-12.925-16.045-20.484-8.486z#svgthree#Tillbaka</a>
+	</div>
+	#footer#
+</body>
+</html>
