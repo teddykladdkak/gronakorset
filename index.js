@@ -472,11 +472,13 @@ function startServer(){
 						options.datum = req.query.dat;
 					};
 					if (fs.existsSync(filePath)) {
-						var readData = fs.readFileSync(filePath, 'utf8');
+						var readData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 					}else{
-						var readData = makeDefFile(path);
+						var def = makeDefault();
+						fs.writeFileSync(filePath, JSON.stringify(def, null, ' '));
+						var readData = def;
 					};
-					options.data = JSON.parse(readData);
+					options.data = readData;
 					options.id = req.query.id;
 					res.render('login', options);
 				}else{
