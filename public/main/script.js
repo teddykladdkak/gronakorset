@@ -47,11 +47,72 @@
 			document.getElementById('avdid').value = localStorage.getItem('id');
 		};
 	};
+	function removeWradLine(elem){
+		elem.parentElement.parentElement.removeChild(elem.parentElement);
+		var wrapper = document.getElementById('moreWardWrapper');
+		if(wrapper.getElementsByTagName('div').length == 0){
+			addWardLine()
+		};
+	};
+	function addWardLine(val){
+		var wrapper = document.getElementById('moreWardWrapper');
+			var line = document.createElement('div');
+				var input = document.createElement('input');
+					input.setAttribute('type', 'text');
+					input.setAttribute('placeholder', 'ID');
+					input.setAttribute('maxlength', '5');
+					if(!val || val == ''){}else{
+						input.setAttribute('value', val);
+					};
+				line.appendChild(input);
+				var button = document.createElement('span');
+					button.setAttribute('class', 'button redbutton');
+					button.setAttribute('onclick', 'removeWradLine(this);');
+					var svg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
+						svg.setAttribute('aria-hidden', 'true');
+						svg.setAttribute('class', 'svg');
+						svg.setAttribute('role', 'img');
+						svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+						svg.setAttribute('viewBox', '0 0 448 512');
+						var path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+							path.setAttribute('fill', 'currentColor');
+							path.setAttribute('d', 'M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z');
+						svg.appendChild(path);
+					button.appendChild(svg);
+					var text = document.createTextNode('Ta bort');
+					button.appendChild(text);
+				line.appendChild(button);
+			wrapper.appendChild(line);
+	};
 
+	function addWardLines(){
+		if(!localStorage.getItem('gronaKorsetFlera')){
+
+		}else{
+			removechilds(document.getElementById('moreWardWrapper'));
+			var saveID = localStorage.getItem('gronaKorsetFlera').split(',');
+			for (var i = saveID.length - 1; i >= 0; i--) {
+				addWardLine(saveID[i]);
+			};
+		};
+	};
 //Knappar
 	function oppnaFlera(){
-		var id = prompt("Skriv önskade IDn med \",\" mellan. (ex. \"123456,654321\")", "64362,10589");
-		window.open(encodeURI('/org.html?id=' + id),'_self')
+		var allWards = [];
+		var wrapper = document.getElementById('moreWardWrapper');
+			var allLines = wrapper.getElementsByTagName('div');
+			for (var i = allLines.length - 1; i >= 0; i--) {
+				var input = allLines[i].getElementsByTagName('input')[0];
+				if(input.value.split('').length == 5){
+					input.removeAttribute('style');
+				}else{
+					input.setAttribute('style', 'border: solid 3px red;');
+					return false;
+				}
+				allWards.push(input.value);
+			};
+		localStorage.setItem('gronaKorsetFlera', allWards.join(','));
+		window.open(encodeURI('/org.html?id=' + allWards.join(',')),'_self')
 	};
 	//Öppnar vyn för gröna korset.
 	function loggaIn(){
@@ -149,4 +210,4 @@
 			var txt = document.createTextNode('Your browser does not support the video tag.');
 			vid.appendChild(txt);
 		parent.appendChild(vid);
-	}
+	};

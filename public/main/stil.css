@@ -50,13 +50,16 @@ a.button{
 	text-decoration: none;
 }
 .button:hover {
-  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+	background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
 .button:active {
-  background-color: #6eb9f7;
-  background-size: 100%;
-  transition: background 0s;
+	background-color: #6eb9f7;
+	background-size: 100%;
+	transition: background 0s;
 }
+.button.redbutton {background-color: #f3212d;}
+.button.redbutton:hover {background: #f54750 radial-gradient(circle, transparent 1%, #f54750 1%) center/15000%;}
+.button.redbutton:active {background-color: #f76e75;}
 .button svg {
 	height: 15px;
 	vertical-align: middle;
@@ -224,7 +227,7 @@ input, button {
 	-ms-transition: all 150ms linear;
 	transition: all 150ms linear;
 }
-#install, #nyanv {
+#install, #nyanv, #flera {
 	display: none;
 }
 #nyanv {
